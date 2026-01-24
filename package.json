@@ -1,24 +1,33 @@
 {
   "name": "artsfest-gptc-cherthala",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "A Next.js 14 application for the Arts Festival at GPTC Cherthala.",
+  "main": "next.config.js",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "start": "next start"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gptcarts52-lgtm/artsfest-gptc-cherthala.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gptcarts52-lgtm/artsfest-gptc-cherthala/issues"
+  },
+  "homepage": "https://github.com/gptcarts52-lgtm/artsfest-gptc-cherthala#readme",
   "dependencies": {
-    "next": "14.0.4",
-    "react": "^18",
-    "react-dom": "^18"
+    "next": "^14.0.4",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.0.4",
-    "typescript": "^5"
+    "@types/node": "^25.0.10",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
   }
 }
