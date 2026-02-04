@@ -1,0 +1,24 @@
+{
+    "departments": [
+        {
+            "code": "CHE",
+            "name": "Computer Hardware Engineering"
+        },
+        {
+            "code": "CT",
+            "name": "Computer Engineering"
+        },
+        {
+            "code": "ME",
+            "name": "Mechanical Engineering"
+        },
+        {
+            "code": "IE",
+            "name": "Instrumentation Engineering"
+        },
+        {
+            "code": "EC",
+            "name": "Electronics & Communication"
+        }
+    ]
+}

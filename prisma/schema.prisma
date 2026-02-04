@@ -1,0 +1,202 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Enums
+enum Role {
+  STUDENT
+  VOLUNTEER
+  ADMIN
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum ProgramType {
+  SOLO
+  GROUP
+}
+
+enum ProgramCategory {
+  ON_STAGE
+  OFF_STAGE
+}
+
+enum RegistrationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum CertificateType {
+  PARTICIPATION
+  GRADE
+}
+
+// Models
+model User {
+  id            String   @id @default(cuid())
+  fullName      String
+  email         String   @unique
+  password      String
+  studentAdmnNo String   @unique
+  gender        Gender
+  role          Role     @default(STUDENT)
+  department    String?
+  semester      String?
+  houseId       String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  house                House?         @relation(fields: [houseId], references: [id])
+  registrations        Registration[] @relation("UserRegistrations")
+  groupMemberships     GroupMember[]
+  attendances          Attendance[]
+  certificates         Certificate[]
+  markedAttendances    Attendance[]   @relation("AttendanceMarker")
+
+  @@index([email])
+  @@index([studentAdmnNo])
+  @@index([houseId])
+}
+
+model House {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  color       String?
+  description String?
+  isGirlsHouse Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  users         User[]
+  registrations Registration[]
+
+  @@index([name])
+}
+
+model Program {
+  id          String          @id @default(cuid())
+  name        String          @unique
+  description String?
+  type        ProgramType
+  category    ProgramCategory
+  minMembers  Int             @default(1)
+  maxMembers  Int             @default(1)
+  isActive    Boolean         @default(true)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  // Relations
+  registrations Registration[]
+  attendances   Attendance[]
+
+  @@index([type])
+  @@index([category])
+  @@index([isActive])
+}
+
+model Registration {
+  id        String             @id @default(cuid())
+  programId String
+  userId    String
+  houseId   String
+  isGroup   Boolean            @default(false)
+  groupName String?
+  category  ProgramCategory
+  status    RegistrationStatus @default(CONFIRMED)
+  createdAt DateTime           @default(now())
+  updatedAt DateTime           @updatedAt
+
+  // Relations
+  program      Program       @relation(fields: [programId], references: [id], onDelete: Cascade)
+  user         User          @relation("UserRegistrations", fields: [userId], references: [id], onDelete: Cascade)
+  house        House         @relation(fields: [houseId], references: [id])
+  groupMembers GroupMember[]
+  attendances  Attendance[]
+  certificates Certificate[]
+
+  @@index([programId])
+  @@index([userId])
+  @@index([houseId])
+  @@index([status])
+}
+
+model GroupMember {
+  id             String   @id @default(cuid())
+  registrationId String
+  userId         String
+  createdAt      DateTime @default(now())
+
+  // Relations
+  registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([registrationId, userId])
+  @@index([registrationId])
+  @@index([userId])
+}
+
+model Attendance {
+  id             String   @id @default(cuid())
+  registrationId String
+  userId         String
+  programId      String
+  isPresent      Boolean  @default(false)
+  markedBy       String
+  markedAt       DateTime @default(now())
+
+  // Relations
+  registration Registration @relation(fields: [registrationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  program      Program      @relation(fields: [programId], references: [id])
+  marker       User         @relation("AttendanceMarker", fields: [markedBy], references: [id])
+
+  @@unique([registrationId, userId])
+  @@index([registrationId])
+  @@index([userId])
+  @@index([programId])
+}
+
+model Certificate {
+  id             String          @id @default(cuid())
+  userId         String
+  registrationId String?
+  type           CertificateType
+  grade          String?
+  certificateUrl String?
+  emailSent      Boolean         @default(false)
+  generatedAt    DateTime        @default(now())
+
+  // Relations
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  registration Registration? @relation(fields: [registrationId], references: [id], onDelete: SetNull)
+
+  @@index([userId])
+  @@index([registrationId])
+  @@index([type])
+}
+
+model Configuration {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  value       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([key])
+}

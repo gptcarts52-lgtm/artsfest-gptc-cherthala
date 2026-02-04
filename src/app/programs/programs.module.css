@@ -1,0 +1,258 @@
+/* src/app/programs/programs.module.css */
+
+.container {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: var(--background);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    color: var(--primary-red);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.filters {
+    display: flex;
+    gap: 1rem;
+}
+
+.filterButton {
+    padding: 0.5rem 1.5rem;
+    border: 1px solid var(--primary-red);
+    background: transparent;
+    color: var(--primary-red);
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.filterButton.active,
+.filterButton:hover {
+    background: var(--primary-red);
+    color: var(--cream-white);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--cream-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+[data-theme='dark'] .card {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+.cardHeader {
+    margin-bottom: 1rem;
+}
+
+.programName {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--deep-black);
+    margin-bottom: 0.5rem;
+}
+
+[data-theme='dark'] .programName {
+    color: var(--cream-white);
+}
+
+.programType {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .programType {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--cream-white);
+}
+
+.description {
+    color: var(--deep-black);
+    opacity: 0.8;
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+    flex-grow: 1;
+}
+
+[data-theme='dark'] .description {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: var(--deep-black);
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+}
+
+[data-theme='dark'] .meta {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.registerButton {
+    width: 100%;
+    padding: 0.75rem;
+    background: var(--primary-red);
+    color: var(--cream-white);
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.registerButton:hover {
+    background: #d41f1f;
+    /* Slightly darker shade */
+}
+
+.registerButton:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Modal */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modalContent {
+    background: var(--cream-white);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+[data-theme='dark'] .modalContent {
+    background: #1a1a1a;
+    border: 1px solid #333;
+}
+
+.modalTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-red);
+    margin-bottom: 1rem;
+}
+
+.inputGroup {
+    margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .inputLabel {
+    color: var(--cream-white);
+}
+
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .input {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--cream-white);
+}
+
+.modalButtons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
+
+.cancelButton {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .cancelButton {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--cream-white);
+}
+
+.confirmButton {
+    padding: 0.75rem 1.5rem;
+    background: var(--primary-red);
+    color: var(--cream-white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.confirmButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.errorMessage {
+    color: #e74c3c;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.successMessage {
+    color: green;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}

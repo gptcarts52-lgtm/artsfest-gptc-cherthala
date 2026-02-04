@@ -1,0 +1,223 @@
+/* src/app/dashboard/dashboard.module.css */
+
+.container {
+    min-height: 100vh;
+    padding: 2rem;
+    background-color: var(--background);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='dark'] .header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.title {
+    color: var(--primary-red);
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.userName {
+    font-weight: 600;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .userName {
+    color: var(--cream-white);
+}
+
+.logoutButton {
+    background-color: transparent;
+    border: 1px solid var(--primary-red);
+    color: var(--primary-red);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.logoutButton:hover {
+    background-color: var(--primary-red);
+    color: var(--cream-white);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.card {
+    background: var(--cream-white);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .card {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+.cardTitle {
+    color: var(--primary-red);
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.infoRow {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.infoRow:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.label {
+    color: var(--deep-black);
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+[data-theme='dark'] .label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.value {
+    color: var(--deep-black);
+    font-weight: 500;
+}
+
+[data-theme='dark'] .value {
+    color: var(--cream-white);
+}
+
+/* Registration Limits */
+.paramsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.paramItem {
+    width: 100%;
+}
+
+.paramHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.progressBar {
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+[data-theme='dark'] .progressBar {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.progressFill {
+    height: 100%;
+    background-color: var(--primary-red);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* Registrations List */
+.registrationsList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.regItem {
+    padding: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.02);
+}
+
+[data-theme='dark'] .regItem {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.regHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.programName {
+    font-weight: 600;
+    color: var(--deep-black);
+}
+
+[data-theme='dark'] .programName {
+    color: var(--cream-white);
+}
+
+.statusBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.statusBadge.confirmed {
+    background-color: rgba(0, 128, 0, 0.1);
+    color: green;
+}
+
+.statusBadge.pending {
+    background-color: rgba(255, 165, 0, 0.1);
+    color: orange;
+}
+
+.statusBadge.cancelled {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: red;
+}
+
+.regMeta {
+    display: flex;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--deep-black);
+    opacity: 0.8;
+}
+
+[data-theme='dark'] .regMeta {
+    color: rgba(255, 255, 255, 0.7);
+}

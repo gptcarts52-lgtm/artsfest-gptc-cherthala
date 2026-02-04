@@ -1,0 +1,133 @@
+/* src/app/auth.module.css */
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--background);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/kerala_hero.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+}
+
+.authCard {
+    background: var(--cream-white);
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    border: 1px solid var(--primary-gold);
+}
+
+[data-theme='dark'] .authCard {
+    background: #1a1a1a;
+    border-color: #333;
+}
+
+[data-theme='dark'] .label {
+    color: var(--cream-white);
+}
+
+.title {
+    color: var(--primary-red);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.subtitle {
+    color: var(--foreground);
+    margin-bottom: 2rem;
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.formGroup {
+    text-align: left;
+}
+
+.label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--deep-black);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    background: var(--background);
+    color: var(--foreground);
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--primary-gold);
+}
+
+.submitButton {
+    background-color: var(--primary-red);
+    color: var(--cream-white);
+    padding: 1rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.submitButton:hover {
+    background-color: #660000;
+    transform: translateY(-2px);
+}
+
+.links {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--foreground);
+}
+
+.link {
+    color: var(--primary-red);
+    font-weight: 600;
+    margin-left: 0.5rem;
+    transition: color 0.2s;
+}
+
+.link:hover {
+    color: var(--primary-gold);
+}
+
+.backLink {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    color: var(--cream-white);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    z-index: 10;
+}
+
+.backLink:hover {
+    color: var(--primary-gold);
+}
