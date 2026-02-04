@@ -86,3 +86,5 @@ yarn-error.log*
 
 # TypeScript
 *.tsbuildinfo
+docker-compose.yml
+prisma/seed.ts
