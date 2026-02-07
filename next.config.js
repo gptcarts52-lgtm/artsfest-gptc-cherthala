@@ -1,7 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['images.unsplash.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+    ],
   },
   eslint: {
     ignoreDuringBuilds: true,
@@ -9,9 +14,7 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  env: {
-    CUSTOM_KEY: process.env.CUSTOM_KEY ?? '',
-  },
+  output: 'standalone',
 }
 
 module.exports = nextConfig

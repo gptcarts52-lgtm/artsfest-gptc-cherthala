@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { writeFile } from 'fs/promises'
 import path from 'path'
 
+// NOTE: Local filesystem uploads will NOT work on Vercel as it is read-only.
+// In production, consider using Supabase Storage or AWS S3.
+
 export async function POST(request: NextRequest) {
     try {
         const data = await request.formData()
