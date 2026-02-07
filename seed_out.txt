@@ -1,0 +1,34 @@
+🌱 Starting database seed...
+Creating houses...
+✅ Created 5 houses
+Creating configurations...
+✅ Created 9 configurations
+Creating admin user...
+Creating volunteer user...
+✅ Created admin and volunteer users
+Creating sample programs...
+✅ Created 19 sample programs
+Creating dummy students...
+✅ Created 5 dummy students
+Creating sample registrations...
+✅ Created sample registrations
+Assigning programs to volunteer...
+✅ Assigned programs to volunteer
+❌ Error seeding database: PrismaClientKnownRequestError: 
+Invalid `prisma.user.upsert()` invocation in
+/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/prisma/seed.ts:670:41
+
+  667 for (const stud of moreStudents) {
+  668     const h = await prisma.house.findUnique({ where: { name: stud.house } })
+  669     if (h) {
+→ 670         const u = await prisma.user.upsert(
+Unique constraint failed on the fields: (`studentAdmnNo`)
+    at $n.handleRequestError (/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/node_modules/@prisma/client/runtime/library.js:121:7315)
+    at $n.handleAndLogRequestError (/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/node_modules/@prisma/client/runtime/library.js:121:6623)
+    at $n.request (/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/node_modules/@prisma/client/runtime/library.js:121:6307)
+    at async l (/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/node_modules/@prisma/client/runtime/library.js:130:9633)
+    at async main (/home/karma/Documents/Desktop/codes/gptc arts program/artsfest-gptc-cherthala/prisma/seed.ts:670:23) {
+  code: 'P2002',
+  clientVersion: '5.22.0',
+  meta: { modelName: 'User', target: [ 'studentAdmnNo' ] }
+}

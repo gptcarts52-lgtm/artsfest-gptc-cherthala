@@ -22,9 +22,15 @@ export async function POST(request: NextRequest) {
 
         const { studentAdmnNo, password } = validation.data
 
-        // Find user by student admission number
-        const user = await prisma.user.findUnique({
-            where: { studentAdmnNo },
+        // Find user by student admission number OR email
+        // We treat the 'studentAdmnNo' field from request as a generic identifier
+        const user = await prisma.user.findFirst({
+            where: {
+                OR: [
+                    { studentAdmnNo: { equals: studentAdmnNo, mode: 'insensitive' } },
+                    { email: { equals: studentAdmnNo, mode: 'insensitive' } }
+                ]
+            },
             include: {
                 house: {
                     select: {

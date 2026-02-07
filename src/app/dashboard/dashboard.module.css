@@ -3,6 +3,8 @@
 .container {
     min-height: 100vh;
     padding: 2rem;
+    padding-top: 0;
+    /* Account for fixed/absolute navbar */
     background-color: var(--background);
 }
 
@@ -10,13 +12,17 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
-[data-theme='dark'] .header {
-    border-bottom-color: rgba(255, 255, 255, 0.1);
+@media (prefers-color-scheme: dark) {
+    .header {
+        border-bottom-color: var(--border-color);
+    }
 }
 
 .title {
@@ -29,15 +35,107 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .userName {
-    font-weight: 600;
-    color: var(--deep-black);
+    font-weight: 700;
+    color: inherit;
+    /* Inherit from welcomeText */
 }
 
-[data-theme='dark'] .userName {
-    color: var(--cream-white);
+.welcomeText {
+    color: var(--primary-red);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .welcomeText {
+        color: #ff6b6b;
+    }
+}
+
+/* Action Section for big buttons */
+.actionSection {
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.browseButton {
+    background: linear-gradient(135deg, var(--primary-red) 0%, #a00000 100%);
+    color: white;
+    padding: 1.2rem 3rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+}
+
+.browseButton:hover {
+    transform: scale(1.05) translateY(-2px);
+    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.5);
+}
+
+.browseButton:active {
+    transform: scale(0.98);
+    box-shadow: 0 2px 10px rgba(139, 0, 0, 0.2);
+}
+
+/* Shimmer animation */
+.browseButton::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 200%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .logoutButton {
@@ -49,6 +147,7 @@
     cursor: pointer;
     transition: all 0.3s;
     font-weight: 600;
+    white-space: nowrap;
 }
 
 .logoutButton:hover {
@@ -63,16 +162,18 @@
 }
 
 .card {
-    background: var(--cream-white);
+    background: var(--card-bg);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
 }
 
-[data-theme='dark'] .card {
-    background: #1a1a1a;
-    border-color: #333;
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
 }
 
 .cardTitle {
@@ -87,7 +188,7 @@
     justify-content: space-between;
     margin-bottom: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid var(--border-color);
 }
 
 .infoRow:last-child {
@@ -102,17 +203,22 @@
     font-weight: 600;
 }
 
-[data-theme='dark'] .label {
-    color: rgba(255, 255, 255, 0.8);
+@media (prefers-color-scheme: dark) {
+    .label {
+        color: var(--color-text-muted);
+    }
 }
 
 .value {
     color: var(--deep-black);
     font-weight: 500;
+    text-align: right;
 }
 
-[data-theme='dark'] .value {
-    color: var(--cream-white);
+@media (prefers-color-scheme: dark) {
+    .value {
+        color: var(--foreground);
+    }
 }
 
 /* Registration Limits */
@@ -141,8 +247,10 @@
     overflow: hidden;
 }
 
-[data-theme='dark'] .progressBar {
-    background-color: rgba(255, 255, 255, 0.1);
+@media (prefers-color-scheme: dark) {
+    .progressBar {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
 }
 
 .progressFill {
@@ -166,9 +274,11 @@
     background-color: rgba(0, 0, 0, 0.02);
 }
 
-[data-theme='dark'] .regItem {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
+@media (prefers-color-scheme: dark) {
+    .regItem {
+        background-color: rgba(255, 255, 255, 0.05);
+        border-color: var(--border-color);
+    }
 }
 
 .regHeader {
@@ -176,6 +286,8 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .programName {
@@ -183,8 +295,10 @@
     color: var(--deep-black);
 }
 
-[data-theme='dark'] .programName {
-    color: var(--cream-white);
+@media (prefers-color-scheme: dark) {
+    .programName {
+        color: var(--foreground);
+    }
 }
 
 .statusBadge {
@@ -216,8 +330,923 @@
     font-size: 0.85rem;
     color: var(--deep-black);
     opacity: 0.8;
+    flex-wrap: wrap;
 }
 
-[data-theme='dark'] .regMeta {
-    color: rgba(255, 255, 255, 0.7);
+@media (prefers-color-scheme: dark) {
+    .regMeta {
+        color: var(--color-text-muted);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+        padding-top: 0;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .userInfo {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .logoutButton {
+        width: 100%;
+        text-align: center;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+
+    .infoRow {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.25rem;
+    }
+
+    .value {
+        text-align: left;
+    }
+
+    .browseButton {
+        width: 100%;
+        justify-content: center;
+        padding: 1rem 1.5rem;
+    }
+}
+
+/* Group Members Display */
+.groupMembersList {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px dashed var(--border-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .groupMembersList {
+        border-top-color: var(--border-color);
+    }
+}
+
+.groupMembersLabel {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--deep-black);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+@media (prefers-color-scheme: dark) {
+    .groupMembersLabel {
+        color: var(--foreground);
+    }
+}
+
+.membersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.memberBadge {
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    color: var(--deep-black);
+    display: inline-block;
+}
+
+@media (prefers-color-scheme: dark) {
+    .memberBadge {
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--foreground);
+    }
+}
+
+/* Admin Dashboard Styles */
+.adminContainer {
+    animation: fadeIn 0.8s ease-out;
+}
+
+.filtersSection {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .filtersSection {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
+}
+
+.filterGroup {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.searchInput,
+.selectInput {
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--background);
+    color: var(--deep-black);
+    min-width: 250px;
+    font-size: 0.95rem;
+}
+
+[data-theme='dark'] .searchInput,
+[data-theme='dark'] .selectInput {
+    background: #111;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--cream-white);
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--deep-black);
+}
+
+@media (prefers-color-scheme: dark) {
+    .checkboxLabel {
+        color: var(--foreground);
+    }
+}
+
+/* Table Styles */
+.tableCard {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+    .tableCard {
+        background: var(--card-bg);
+        border-color: var(--border-color);
+    }
+}
+
+.tableWrapper {
+    overflow-x: auto;
+}
+
+.userTable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.userTable th {
+    text-align: left;
+    padding: 1rem;
+    border-bottom: 2px solid var(--border-color);
+    color: var(--primary-red);
+    font-weight: 600;
+}
+
+.userTable td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--foreground);
+    vertical-align: top;
+}
+
+@media (prefers-color-scheme: dark) {
+    .userTable th {
+        border-bottom-color: var(--border-color);
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    .userTable td {
+        border-bottom-color: var(--border-color);
+        color: var(--foreground);
+    }
+}
+
+.tdName {
+    min-width: 200px;
+}
+
+.houseBadge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.regTags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.miniTag {
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+    .miniTag {
+        background: rgba(255, 255, 255, 0.1);
+    }
+}
+
+.exportButton {
+    background: var(--color-success);
+    color: white;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+    height: 42px;
+    /* Ensure consistency */
+}
+
+.exportButton:hover {
+    background: #006000;
+    transform: translateY(-1px);
+}
+
+.exportButton.pdf {
+    background: var(--color-danger);
+}
+
+.exportButton.pdf:hover {
+    filter: brightness(0.9);
+}
+
+.exportButton.excel {
+    background: var(--color-success);
+}
+
+.exportButton.excel:hover {
+    filter: brightness(0.9);
+}
+
+.exportButton.csv {
+    background: var(--color-info);
+}
+
+.exportButton.csv:hover {
+    filter: brightness(0.9);
+}
+
+/* Admin Sidebar/Tabs */
+.adminNav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .adminNav {
+        border-bottom-color: var(--border-color);
+    }
+}
+
+.navItem {
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--primary-red);
+    background: transparent;
+    border: 1px solid var(--primary-red);
+    opacity: 1;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .navItem {
+        color: #ff6b6b;
+        border-color: #ff6b6b;
+    }
+}
+
+.navItem:hover {
+    background: rgba(139, 0, 0, 0.05);
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .navItem:hover {
+        background: rgba(255, 107, 107, 0.1);
+    }
+}
+
+.navItem.active {
+    background: var(--primary-red);
+    color: white !important;
+    box-shadow: 0 4px 6px rgba(139, 0, 0, 0.2);
+}
+
+@media (prefers-color-scheme: dark) {
+    .navItem.active {
+        background: #ff6b6b;
+        color: var(--deep-black) !important;
+        border-color: #ff6b6b;
+    }
+}
+
+/* CRUD Management Styles */
+.crudHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.addButton {
+    background: var(--primary-red);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formLabel {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+/* Modal styles overrides for admin */
+
+
+.actionButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.editBtn,
+.deleteBtn {
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.editBtn {
+    background: var(--color-info);
+    color: white;
+}
+
+.deleteBtn {
+    background: var(--color-danger);
+    color: white;
+}
+
+/* Configuration Grid & Cards */
+.configGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.configCard {
+    background: var(--cream-white);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 1.5rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.configCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .configCard {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.15);
+    }
+}
+
+.configKey {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--primary-red);
+    margin-bottom: 0.5rem;
+}
+
+.configDesc {
+    font-size: 0.9rem;
+    opacity: 0.8;
+    margin-bottom: 1rem;
+    color: var(--deep-black);
+    line-height: 1.5;
+}
+
+@media (prefers-color-scheme: dark) {
+    .configDesc {
+        color: var(--cream-white);
+        opacity: 0.7;
+    }
+}
+
+.configValueContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.05);
+    /* Slightly darker for contrast */
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    /* Ensure long values don't break layout */
+}
+
+.configValueContainer span {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    display: inline-block;
+}
+
+[data-theme='dark'] .configValueContainer {
+    background: rgba(255, 255, 255, 0.08);
+    /* Slightly lighter for contrast */
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.configValue {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--deep-black);
+}
+
+@media (prefers-color-scheme: dark) {
+    .configValue {
+        color: var(--cream-white);
+    }
+}
+
+.editConfigBtn {
+    background: white;
+    /* Distinct background */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--deep-black);
+    font-weight: 600;
+    font-size: 0.85rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+    .editConfigBtn {
+        background: #333;
+        border-color: rgba(255, 255, 255, 0.2);
+        color: var(--cream-white);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+}
+
+.editConfigBtn:hover {
+    background: var(--primary-red);
+    color: white;
+    border-color: var(--primary-red);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Visibility Fixes for Inputs */
+@media (prefers-color-scheme: dark) {
+
+    .searchInput,
+    .selectInput {
+        background: #000;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.searchInput,
+.selectInput {
+    color: var(--deep-black);
+    /* Ensure text is visible on white background */
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: white;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Visibility Fixes for Buttons in general */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+.adminModal {
+    max-width: 600px;
+    width: 90%;
+    background: var(--background);
+    color: var(--foreground);
+    padding: 2.5rem;
+    border-radius: 16px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transform: translateY(0);
+    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .adminModal {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.cancelButton {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--deep-black);
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+@media (prefers-color-scheme: dark) {
+    .cancelButton {
+        border-color: rgba(255, 255, 255, 0.4);
+        color: white;
+    }
+}
+
+.cancelButton:hover {
+    background: rgba(0, 0, 0, 0.05);
+    border-color: var(--deep-black);
+}
+
+@media (prefers-color-scheme: dark) {
+    .cancelButton:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: white;
+    }
+}
+
+/* Ensure inputs are full width in forms */
+.formGroup .searchInput,
+.formGrid .searchInput,
+.formGrid .selectInput {
+    width: 100%;
+}
+.exportButton:hover {
+    filter: brightness(0.9);
+    transform: translateY(-2px);
+}
+
+.exportButtons {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.jsonValue {
+    font-family: monospace;
+    font-size: 0.85rem;
+    white-space: pre-wrap;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 0.5rem;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme='dark'] .jsonValue {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Update configValueContainer to allow column layout for large items */
+.configValueContainer.hasJson {
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.configValueContainer.hasJson .configValue {
+    width: 100%;
+    text-align: left;
+}
+
+/* View Mode Toggles */
+.viewToggleContainer {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+    padding: 0.5rem;
+    background: rgba(0,0,0,0.03);
+    border-radius: 100px;
+    width: fit-content;
+    margin-left: 0; 
+    border: 1px solid var(--border-color);
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewToggleContainer {
+        background: rgba(255,255,255,0.03);
+    }
+}
+
+.viewToggleBtn {
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: transparent;
+    color: var(--deep-black);
+    font-size: 0.95rem;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewToggleBtn {
+        color: var(--color-text-muted);
+    }
+}
+
+.viewToggleBtn.active {
+    background: var(--primary-red);
+    color: white;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewToggleBtn.active {
+        background: #ff6b6b;
+        color: #1a1a1a;
+        box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+    }
+}
+
+.viewToggleBtn:hover:not(.active) {
+    background: rgba(0,0,0,0.05);
+    color: var(--primary-red);
+}
+
+@media (prefers-color-scheme: dark) {
+    .viewToggleBtn:hover:not(.active) {
+        background: rgba(255,255,255,0.05);
+        color: #ff6b6b;
+    }
+}
+
+.tableRowHover {
+    transition: background-color 0.2s ease;
+}
+
+.tableRowHover:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+@media (prefers-color-scheme: dark) {
+    .tableRowHover:hover {
+        background-color: rgba(255,255,255,0.02);
+    }
+}
+
+/* Responsive Card List for Mobile */
+.mobileCardList {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobileCard {
+    background: var(--card-bg);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+    .mobileCard {
+        border-color: var(--border-color);
+    }
+}
+
+.mobileCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.mobileCardTitle {
+    font-weight: 600;
+    color: var(--deep-black);
+    font-size: 1rem;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mobileCardTitle {
+        color: var(--foreground);
+    }
+}
+
+.mobileCardRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.mobileCardActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding-top: 0.8rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 0.8rem;
+}
+
+/* Hide table on mobile, show card list */
+@media (max-width: 768px) {
+    .userTable {
+        display: none;
+    }
+    
+    .mobileCardList {
+        display: flex;
+    }
+
+    .tableWrapper {
+        overflow: visible;
+    }
+}
+
+.innerNav {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0px;
+}
+
+.innerNavBtn {
+    padding: 0.8rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--deep-black);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.95rem;
+    opacity: 0.7;
+}
+
+.innerNavBtn:hover {
+    opacity: 1;
+    color: var(--primary-red);
+}
+
+.innerNavBtn.active {
+    border-bottom-color: var(--primary-red);
+    color: var(--primary-red);
+    font-weight: 600;
+    opacity: 1;
+}
+
+@media (prefers-color-scheme: dark) {
+    .innerNavBtn {
+        color: var(--foreground);
+    }
+}
+
+.roleBadge {
+    padding: 2px 8px;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+.roleBadge_MASTER {
+    background-color: #fef3c7;
+    color: #d97706;
+}
+
+.roleBadge_ADMIN {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+.roleBadge_VOLUNTEER {
+    background-color: #dcfce7;
+    color: #16a34a;
+}
+
+.roleBadge_STUDENT {
+    background-color: #f3f4f6;
+    color: #4b5563;
 }

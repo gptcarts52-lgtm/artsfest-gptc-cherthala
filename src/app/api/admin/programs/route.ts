@@ -82,5 +82,5 @@ async function postHandler(
     }
 }
 
-export const GET = withAuth(getHandler, { roles: ['ADMIN'] as any })
-export const POST = withAuth(postHandler, { roles: ['ADMIN'] as any })
+export const GET = withAuth(getHandler, { roles: ['ADMIN', 'MASTER'] as any })
+export const POST = withAuth(postHandler, { roles: ['ADMIN', 'MASTER'] as any })

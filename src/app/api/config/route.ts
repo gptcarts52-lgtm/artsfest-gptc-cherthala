@@ -4,7 +4,7 @@ import { ApiResponse } from '@/types'
 
 export async function GET() {
     try {
-        const config = getAppConfig()
+        const config = await getAppConfig()
 
         return NextResponse.json<ApiResponse>(
             {

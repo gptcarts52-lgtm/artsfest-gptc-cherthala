@@ -71,10 +71,6 @@ export default function LoginPage() {
 
     return (
         <div className={`${styles.container} ${inter.className}`}>
-            <Link href="/" className={styles.backLink}>
-                ← Back to Home
-            </Link>
-
             <div className={styles.authCard}>
                 <h1 className={`${styles.title} ${cinzel.className}`}>Welcome Back</h1>
                 <p className={styles.subtitle}>Sign in to continue to ArtsFest</p>
@@ -82,14 +78,14 @@ export default function LoginPage() {
                 <form onSubmit={handleSubmit} className={styles.form}>
                     <div className={styles.formGroup}>
                         <label className={styles.label} htmlFor="studentAdmnNo">
-                            Admission Number
+                            Admission Number or Email
                         </label>
                         <input
                             type="text"
                             id="studentAdmnNo"
                             name="studentAdmnNo"
                             className={styles.input}
-                            placeholder="Enter your admission number"
+                            placeholder="Enter your admission number or email"
                             value={formData.studentAdmnNo}
                             onChange={handleChange}
                         />

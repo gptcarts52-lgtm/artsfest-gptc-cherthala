@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             )
         }
 
-        const { fullName, email, password, studentAdmnNo, gender, department, semester } =
+        const { fullName, email, password, studentAdmnNo, phone, gender, department, semester } =
             validation.data
 
         // Check if user already exists
@@ -57,6 +57,7 @@ export async function POST(request: NextRequest) {
                 email,
                 password: hashedPassword,
                 studentAdmnNo,
+                phone,
                 gender: gender as any,
                 department,
                 semester,

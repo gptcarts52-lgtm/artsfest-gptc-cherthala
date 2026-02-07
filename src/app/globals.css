@@ -7,14 +7,33 @@
   --deep-black: #0A0A0A;
   --overlay-dark: rgba(0, 0, 0, 0.6);
 
+  /* Semantic Colors */
+  --color-success: #198754;
+  --color-danger: #dc3545;
+  --color-info: #0d6efd;
+  --color-warning: #ffc107;
+  --color-text-muted: #6c757d;
+
   --foreground: var(--deep-black);
   --background: var(--cream-white);
+  --card-bg: var(--cream-white);
+  --border-color: rgba(0, 0, 0, 0.1);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --foreground: var(--cream-white);
     --background: var(--deep-black);
+    --card-bg: #1a1a1a;
+    --border-color: rgba(255, 255, 255, 0.1);
+
+    /* Semantic Colors - Dark Mode Adjustment */
+    --color-success: #20c997;
+    /* Brighter/Lighter for dark mode */
+    --color-danger: #f87171;
+    --color-info: #6ea8fe;
+    --color-warning: #ffda6a;
+    --color-text-muted: #adb5bd;
   }
 }
 

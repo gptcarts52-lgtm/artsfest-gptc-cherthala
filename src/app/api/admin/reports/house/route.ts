@@ -127,4 +127,4 @@ async function handler(request: NextRequest, context: { user: { userId: string; 
     }
 }
 
-export const GET = withAuth(handler, { roles: ['ADMIN'] as any })
+export const GET = withAuth(handler, { roles: ['ADMIN', 'MASTER'] as any })

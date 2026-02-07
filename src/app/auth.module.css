@@ -21,6 +21,7 @@
     max-width: 400px;
     text-align: center;
     border: 1px solid var(--primary-gold);
+    transition: all 0.3s ease;
 }
 
 [data-theme='dark'] .authCard {
@@ -130,4 +131,26 @@
 
 .backLink:hover {
     color: var(--primary-gold);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .authCard {
+        padding: 2rem 1.5rem;
+        max-width: 100%;
+        margin-top: 3rem;
+        /* Space for navbar */
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .subtitle {
+        margin-bottom: 1.5rem;
+    }
 }

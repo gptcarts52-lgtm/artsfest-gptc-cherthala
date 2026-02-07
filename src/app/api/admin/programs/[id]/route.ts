@@ -79,5 +79,5 @@ async function deleteHandler(
     }
 }
 
-export const PUT = withAuth(putHandler, { roles: ['ADMIN'] as any })
-export const DELETE = withAuth(deleteHandler, { roles: ['ADMIN'] as any })
+export const PUT = withAuth(putHandler, { roles: ['ADMIN', 'MASTER'] as any })
+export const DELETE = withAuth(deleteHandler, { roles: ['ADMIN', 'MASTER'] as any })

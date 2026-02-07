@@ -71,12 +71,12 @@ export function hasRole(userRole: string, allowedRoles: Role[]): boolean {
  * Higher-order function to protect API routes
  */
 export function withAuth(
-    handler: (request: NextRequest, context: { user: { userId: string; role: string } }) => Promise<NextResponse>,
+    handler: (request: NextRequest, context: any) => Promise<NextResponse>,
     options?: {
         roles?: Role[]
     }
 ) {
-    return async (request: NextRequest) => {
+    return async (request: NextRequest, context: any) => {
         const authResult = await authenticate(request)
 
         if (!authResult.authenticated || !authResult.user) {
@@ -94,6 +94,6 @@ export function withAuth(
             )
         }
 
-        return handler(request, { user: authResult.user })
+        return handler(request, { ...context, user: authResult.user })
     }
 }

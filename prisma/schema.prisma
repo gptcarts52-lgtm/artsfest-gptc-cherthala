@@ -15,6 +15,7 @@ enum Role {
   STUDENT
   VOLUNTEER
   ADMIN
+  MASTER
 }
 
 enum Gender {
@@ -51,6 +52,7 @@ model User {
   email         String   @unique
   password      String
   studentAdmnNo String   @unique
+  phone         String?
   gender        Gender
   role          Role     @default(STUDENT)
   department    String?
@@ -60,12 +62,13 @@ model User {
   updatedAt     DateTime @updatedAt
 
   // Relations
-  house                House?         @relation(fields: [houseId], references: [id])
-  registrations        Registration[] @relation("UserRegistrations")
-  groupMemberships     GroupMember[]
-  attendances          Attendance[]
-  certificates         Certificate[]
-  markedAttendances    Attendance[]   @relation("AttendanceMarker")
+  house             House?         @relation(fields: [houseId], references: [id])
+  registrations     Registration[] @relation("UserRegistrations")
+  groupMemberships  GroupMember[]
+  attendances       Attendance[]
+  certificates      Certificate[]
+  markedAttendances Attendance[]   @relation("AttendanceMarker")
+  assignedPrograms  Program[]      @relation("ProgramVolunteers")
 
   @@index([email])
   @@index([studentAdmnNo])
@@ -73,13 +76,13 @@ model User {
 }
 
 model House {
-  id          String   @id @default(cuid())
-  name        String   @unique
-  color       String?
-  description String?
-  isGirlsHouse Boolean @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String   @id @default(cuid())
+  name         String   @unique
+  color        String?
+  description  String?
+  isGirlsHouse Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   // Relations
   users         User[]
@@ -103,6 +106,7 @@ model Program {
   // Relations
   registrations Registration[]
   attendances   Attendance[]
+  volunteers    User[]          @relation("ProgramVolunteers")
 
   @@index([type])
   @@index([category])
@@ -118,6 +122,8 @@ model Registration {
   groupName String?
   category  ProgramCategory
   status    RegistrationStatus @default(CONFIRMED)
+  grade     String?            // WINNER, FIRST_RUNNER_UP, SECOND_RUNNER_UP, PARTICIPATION
+  score     Int                @default(0)
   createdAt DateTime           @default(now())
   updatedAt DateTime           @updatedAt
 

@@ -15,9 +15,9 @@ export async function apiRequest<T = any>(
 ): Promise<T> {
     const { token, ...fetchOptions } = options
 
-    const headers: HeadersInit = {
+    const headers: Record<string, string> = {
         'Content-Type': 'application/json',
-        ...fetchOptions.headers,
+        ...(fetchOptions.headers as any),
     }
 
     if (token) {
